@@ -1,27 +1,26 @@
 <template>
   <Main />
+  <!-- <Loading /> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Main from '@/components/Main.vue'
+import Main from '@/components/Blog/index.vue'
+// import Loading from '@/components/Loading/index.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
     Main
+    // Loading
   }
 })
 </script>
 
 <style lang="stylus">
 #app {
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  box-sizing border-box
-  position relative
-  width 100%
+  margin:0
+  padding:0
   height 100%
 }
 </style>

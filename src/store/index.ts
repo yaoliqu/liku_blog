@@ -6,10 +6,15 @@ import numFactoryModule from './modules/NumFactory'
 
 export const store = createStore<RootStateTypes>({
   state: {
-    text: 'This is Vuex Root.state.text'
+    text: 'This is Vuex Root.state.text',
+    navShow: true
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    SET_NAV(state, action) {
+      state.navShow = action
+    }
+  },
   actions: {},
   modules: {
     numFactoryModule

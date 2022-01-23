@@ -3,3 +3,9 @@ export interface NavItem {
   name: string
   isActive: boolean
 }
+
+export interface articleNavIfc {
+  id: number
+  name: string
+  to: string
+}

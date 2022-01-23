@@ -1,5 +1,5 @@
 import Axios, { AxiosInstance } from 'axios'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 
 const baseURL = 'https://api.github.com'
 
@@ -35,10 +35,16 @@ axios.interceptors.response.use(
     if (error.response && error.response.data) {
       const code = error.response.status
       const msg = error.response.data.message
-      ElMessage.error(`Code: ${code}, Message: ${msg}`)
+      // ElMessage.error(`Code: ${code}, Message: ${msg}`)
+
+      // eslint-disable-next-line no-console
+      console.log(`Code: ${code}, Message: ${msg}`)
+      // eslint-disable-next-line no-console
       console.error(`[Axios Error]`, error.response)
     } else {
-      ElMessage.error(`${error}`)
+      // eslint-disable-next-line no-console
+      console.log(`${error}`)
+      // ElMessage.error(`${error}`)
     }
     return Promise.reject(error)
   }

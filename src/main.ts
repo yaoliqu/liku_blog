@@ -4,6 +4,7 @@ import { key, store } from '@/store'
 import App from './App.vue'
 import styleImport from '@/utils/style-import'
 import '@/style/basic.styl'
+import 'ant-design-vue/dist/antd.css'
 
 const app = createApp(App)
 styleImport(app).use(router).use(store, key).mount('#app')
