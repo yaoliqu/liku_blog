@@ -1,10 +1,10 @@
-// import { mount } from '@vue/test-utils'
-// // @ts-ignore
-// import Header from '../src/components/Header.vue'
+describe('sum function test', () => {
+  it('sum(1, 2) === 3', () => {
+    expect(1 + 2).toBe(3)
+  })
 
-// describe('Header.vue', () => {
-//   it('renders', () => {
-//     const wrapper = mount(Header)
-//     expect(wrapper.html()).toContain('Vite2.x + Vue3.x + TypeScript Starter')
-//   })
-// })
+  // 这里 test 和 it 没有明显区别，it 是指: it should xxx, test 是指 test xxx
+  // test('sum(1, 2) === 3', () => {
+  //   expect(1 + 2).toBe(3)
+  // })
+})
