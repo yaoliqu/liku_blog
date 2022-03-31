@@ -3,13 +3,12 @@
     <Nav />
     <Content />
     <Footer />
-
     <a-back-top :duration="700" :visibilityHeight="300" class="BackTop" @click="goBack">
       <div class="back-top-btn theme-color common-hover">
         <VerticalAlignTopOutlined />
       </div>
     </a-back-top>
-    <NavMobile :drawerShow="drawerShow" :setdrawerShow="setdrawerShow" />
+    <NavMobile :drawerShow="drawerShow" @setdrawerShow="setdrawerShow" />
 
     <div class="nav-btn-mobile common-hover" @click="setdrawerShow(true)">
       <MenuOutlined />
@@ -17,42 +16,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { VerticalAlignTopOutlined, MenuOutlined } from '@ant-design/icons-vue'
 import Nav from './Nav/index.vue'
 import Content from './Content/index.vue'
 import Footer from './Footer/index.vue'
 import NavMobile from './NavMobile/index.vue'
+import { usecommonState } from '@/store/common'
 
-import { useStore } from '@/store'
-
-export default defineComponent({
-  name: 'Main',
-  components: {
-    Nav,
-    Content,
-    Footer,
-    VerticalAlignTopOutlined,
-    MenuOutlined,
-    NavMobile
-  },
-  setup() {
-    const store = useStore()
-    const drawerShow = ref(false)
-    const goBack = () => {
-      store.commit('SET_NAV', true)
-    }
-    const setdrawerShow = (status: boolean) => {
-      drawerShow.value = status
-    }
-    return {
-      goBack,
-      drawerShow,
-      setdrawerShow
-    }
-  }
-})
+const userStore = usecommonState()
+const drawerShow = ref<boolean>(false)
+const goBack = () => {
+  userStore.setNavShow(true)
+}
+const setdrawerShow = (status: boolean) => {
+  drawerShow.value = status
+}
 </script>
 
 <style scoped>
@@ -65,14 +45,14 @@ export default defineComponent({
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url('../../assets/bg.jpeg');
+  background-image: var(--background-image);
 }
 
 .back-top-btn {
   height: 50px;
   width: 50px;
   border-radius: 14px;
-  color: #fff;
+  color: var(--theme-color-font);
   font-size: 24px;
   display: flex;
   justify-content: center;
@@ -92,7 +72,7 @@ export default defineComponent({
     position: fixed;
     width: 38px;
     height: 38px;
-    color: #fff;
+    color: var(--theme-color-font);
     top: 10px;
     right: 10px;
     display: flex;

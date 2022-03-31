@@ -1,20 +1,34 @@
 <template>
-  <Main />
-  <!-- <Loading /> -->
+  <Main v-if="done" />
+  <Loading v-else />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import Main from '@/components/Blog/index.vue'
-// import Loading from '@/components/Loading/index.vue'
+import Loading from '@/components/Loading/index.vue'
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    Main
-    // Loading
-  }
-})
+const done = ref<boolean>(true)
+
+// import { jirishiju } from '@/mook/data'
+// import { usecommonState } from '@/store/common'
+// import { Test } from './api/api'
+
+// export default defineComponent({
+//   name: 'App',
+//   setup() {
+//     // const commonState = usecommonState()
+//     // commonState.getPoem(jirishiju)
+//     // Test.test({})
+//     return {
+//       done
+//     }
+//   },
+//   components: {
+//     Main,
+//     Loading
+//   }
+// })
 </script>
 
 <style lang="stylus">

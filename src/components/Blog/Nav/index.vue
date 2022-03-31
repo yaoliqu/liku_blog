@@ -2,12 +2,22 @@
   <nav class="nav-pc theme-color" :id="navShow ? '' : 'hiddenNav'">
     <div class="nav-content">
       <div class="home-btn common-hover">
-        <HomeOutlined />
+        <HomeOutlined @click="router.replace('/')" />
       </div>
-      <a class="admin-btn common-hover" href target="_blank" rel="noreferrer">
-        <SettingOutlined />
-      </a>
-      <div class="nav-btn common-hover articles-btn">
+      <div class="setThemeBtn">
+        <span>暗黑 </span>
+        <a class="admin-btn">
+          <a-switch
+            :checked="checked"
+            @update:checked="checked = $event"
+            @change="changeTheme(checked)"
+          />
+          <!-- <a-switch v-model:checked="checked"   @change="changeTheme(checked)" /> -->
+        </a>
+        <span>明亮</span>
+      </div>
+      <!-- 下拉tabs -->
+      <!-- <div class="nav-btn common-hover articles-btn">
         <div class="articels-second">
           <div v-for="item in articleNavList" :key="item.id">
             <router-link
@@ -18,7 +28,7 @@
           </div>
         </div>
         文章
-      </div>
+      </div>-->
       <div v-for="item in navArr" :key="item.id">
         <router-link
           :to="item.to"
@@ -34,26 +44,35 @@
 
 <script lang="ts">
 import { defineComponent, reactive, computed, toRefs } from 'vue'
-import { HomeOutlined, SettingOutlined } from '@ant-design/icons-vue'
+import { HomeOutlined } from '@ant-design/icons-vue'
+import { useRouter } from 'vue-router'
 import { articleNavList, navArr } from '@/utils/constant'
-import { useStore } from '@/store'
+import { usecommonState } from '@/store/common'
 
 export default defineComponent({
   name: 'Nav',
   components: {
-    HomeOutlined,
-    SettingOutlined
+    HomeOutlined
   },
   setup() {
-    const store = useStore()
+    const store = usecommonState()
+    const router = useRouter()
+    document.body.onmousewheel = () => {
+      store.setNavShow((window as any).event.wheelDeltaY > 0)
+    }
     const reactiveData = reactive({
-      navShow: computed(() => store.state.navShow)
+      navShow: computed(() => store.navShow),
+      checked: computed(() => store.themeStatus)
     })
-
+    const changeTheme = (e: boolean) => {
+      store.setThemeStatus(e)
+    }
     return {
       ...toRefs(reactiveData),
       articleNavList,
-      navArr
+      navArr,
+      router,
+      changeTheme
     }
   }
 })
@@ -99,15 +118,16 @@ export default defineComponent({
   font-size: 20px;
   margin-right: 20px;
   border-radius: 14px;
-  color: #fff;
+  color: var(--theme-color-font);
   transition: all 0.2s;
   user-select: none;
 }
+
 .nav-btn:hover,
 .home-btn:hover,
 .admin-btn:hover,
 .articels-second-item:hover {
-  color: #fff;
+  color: var(--theme-color-font);
 }
 
 .margin-0 {
@@ -123,12 +143,24 @@ export default defineComponent({
   width: 60px;
   cursor: pointer;
 }
-
-.admin-btn {
+.setThemeBtn {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translate(0, -50%);
+  font-size: 16px;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--theme-color-font);
+}
+
+.admin-btn {
+  /* position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%); */
   font-size: 26px;
   width: 60px;
 }
@@ -157,12 +189,15 @@ export default defineComponent({
   margin-bottom: 6px;
   border-radius: 10px;
   user-select: none;
-  color: #fff;
+  color: var(--theme-color-font);
 }
 
 @media all and (max-width: 1240px) {
   .nav-pc {
     display: none;
   }
+}
+.ant-switch-checked {
+  background-color: var(--theme-hover);
 }
 </style>

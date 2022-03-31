@@ -77,30 +77,32 @@ html {
     transition: all 0.2s !important;
 }
 .common-hover:hover {
-    /* background-color: rgb(180, 180, 0); */
-    background-color: rgb(97, 147, 187) !important;
+    background-color:  var(--theme-hover);
+    /* background-color: rgb(3, 52, 92) !important; */
+    /* background-color: rgb(97, 147, 187) !important; */
     /* color: rgb(88, 88, 88); */
 }
 
 /* 主色 */
 .theme-color {
-    background-color: rgba(35, 35, 44, 1);
+    background-color: var(--theme-bg);
 }
 /* 副色1 */
 .theme-color-1 {
-    background-color: rgb(19, 19, 26);
+  background-color: var(--theme-bg1);
 }
 /* 副色2 */
 .theme-color-2 {
-    background-color: rgb(69, 69, 88) !important;
+    background-color: var(--theme-bg2);
 }
 /* 按钮色 */
 .theme-color-btn {
-    background-color: rgb(97, 147, 187);
-}
+    background-color: var(--theme-color-btn);
+  }
+
 /* 字体亮色 */
 .theme-color-font {
-    color: rgb(97, 147, 187);
+    color: var(--theme-color-font);
 }
 
 /* ————————————————————字体—————————————————————— */

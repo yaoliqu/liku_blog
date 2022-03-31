@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "jest"],
+    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"]

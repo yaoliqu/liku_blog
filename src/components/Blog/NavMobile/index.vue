@@ -1,6 +1,7 @@
 <template>
   <div
     :class="drawerShow ? 'nav-mobile-mask nav-mobile-mask-in' : 'nav-mobile-mask'"
+    @click="setdrawerShow"
   ></div>
   <div
     :class="
@@ -10,9 +11,10 @@
     <div class="nav-mobile-avatar-box">
       <img :src="avatarUrl" alt="avatar" class="nav-mobile-avatar" />
     </div>
-    <div class="nav-nobile-bottom">飞鸟小站</div>
+    <!-- 这里是bottom -->
+    <!-- <div class="nav-nobile-bottom">飞鸟小站</div> -->
     <div
-      v-for="(item, index) in navArr"
+      v-for="(item, index) in mobileNavArr"
       :key="index"
       :class="
         pathname === item.to ? 'nav-mobile-item nav-mobile-active' : 'nav-mobile-item'
@@ -20,31 +22,48 @@
     >
       {{ item.name }}
     </div>
+    <a class="nav-mobile-item">
+      <a-switch
+        :checked="checked"
+        @update:checked="checked = $event"
+        checked-children="开"
+        un-checked-children="关"
+        @change="changeTheme(checked)"
+      />
+    </a>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { avatarUrl, navArr } from '@/utils/constant'
+import { avatarUrl, mobileNavArr } from '@/utils/constant'
+import { usecommonState } from '@/store/common'
 
 export default defineComponent({
   props: {
-    drawerShow: Boolean,
-    setdrawerShow: Function
+    drawerShow: Boolean
   },
-  setup(props) {
+  setup(props, { emit }) {
+    const store = usecommonState()
     const router = useRouter()
-
-    const propsData = reactive({
-      drawerShow: props.drawerShow
+    const setdrawerShow = () => {
+      emit('setdrawerShow', false)
+    }
+    const reactiveData = reactive({
+      checked: computed(() => store.themeStatus)
     })
+    const changeTheme = (e: boolean) => {
+      store.setThemeStatus(e)
+    }
     const pathname = router.currentRoute.value.path
     return {
-      ...toRefs(propsData),
       avatarUrl,
-      navArr,
-      pathname
+      mobileNavArr,
+      pathname,
+      setdrawerShow,
+      ...toRefs(reactiveData),
+      changeTheme
     }
   }
 })
@@ -54,7 +73,7 @@ export default defineComponent({
 .nav-mobile-mask {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   right: -100vw;
   width: 100%;
@@ -102,21 +121,21 @@ export default defineComponent({
   align-items: center;
   font-size: 18px;
   margin-bottom: 10px;
-  color: #fff;
+  color: var(--theme-color-font);
   user-select: none;
   transition: all 0.2s;
 }
 .nav-mobile-active,
-.nav-mobile-item:hover {
+.nav-mobile-item:not(:last-child):hover {
   /* 副色1 */
-  background-color: rgb(19, 19, 26);
+  background-color: var(--theme-bg1);
 }
 
 .nav-nobile-bottom {
   position: absolute;
   bottom: 4px;
   width: 100%;
-  color: #fff;
+  color: var(--theme-color-font);
   font-size: 14px;
   height: 28px;
   display: flex;
@@ -130,5 +149,8 @@ export default defineComponent({
   .nav-mobile {
     display: block;
   }
+}
+.ant-switch-checked {
+  background-color: var(--theme-hover);
 }
 </style>

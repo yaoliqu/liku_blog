@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="vuex-container page-container">
     <div class="page-title">Vuex Test Page</div>
     <p>store Root is: {{ text }}</p>
@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, computed, toRefs } from 'vue'
-import { useStore } from '../store'
+import { useStore } from '../src/store'
 
 export default defineComponent({
   name: 'Vuex',
@@ -33,4 +33,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus"></style> -->

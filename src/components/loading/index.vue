@@ -10,7 +10,7 @@
 <style scoped>
 .Loading-box {
   height: 100%;
-  background-color: #000;
+  background-color: var(--theme-bg);
   display: flex;
   justify-content: center;
   align-items: center;

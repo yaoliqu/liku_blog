@@ -1,31 +1,16 @@
 <template>
   <footer>
+    <span style="color: #fff"> liku的秘密基地 </span>
     <span>
-      个人博客系统
-      <a
-        href="https://github.com/lzxjack/blog-show"
-        target="_blank"
-        rel="noreferrer"
-        class="icp"
-      >
-        「源代码」
+      <a href="https://lzxjack.top/" target="_blank" rel="noreferrer" class="icp">
+        参考自: 飞鸟小站
       </a>
     </span>
     <span>
-      <a
-        href="https://beian.miit.gov.cn/#/Integrated/index"
-        target="_blank"
-        rel="noreferrer"
-        class="icp"
-      >
-        浙ICP备2020043821号-1
-      </a>
-    </span>
-    <span>
-      <span class="site-frame theme-color common-hover"> 123 </span>
-      <span class="site-frame theme-color common-hover"> 123 </span>
-      <span class="site-frame theme-color common-hover"> 123 </span>
-      <span class="site-frame theme-color common-hover"> 123 </span>
+      <span class="site-frame theme-color common-hover"> vue3 </span>
+      <span class="site-frame theme-color common-hover"> typescript </span>
+      <span class="site-frame theme-color common-hover"> vite </span>
+      <span class="site-frame theme-color common-hover"> pinia </span>
     </span>
   </footer>
 </template>
@@ -33,16 +18,18 @@
 <style scoped>
 footer {
   height: 120px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  color: #fff;
+  color: var(--theme-color-font);
+  /* color: #fff; */
   font-size: 16px;
 }
 
 .icp {
+  /* color: var(--theme-color-font); */
   color: #fff;
   transition: all 0.2s;
 }

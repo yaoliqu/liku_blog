@@ -1,0 +1,14 @@
+/* 默认值：light */
+:root {
+  --theme-hover:  rgb(70, 136, 135);
+  --theme-bg: rgb(136, 216, 215);
+  --theme-bg1:  rgb(162, 232, 230);
+  --theme-bg2: rgb(39, 39, 39) !important;
+  --theme-color-btn:rgb(46, 114, 112);
+  --theme-color-font:rgb(0, 0, 0);
+  --theme-color-font1:rgb(58, 54, 54);
+  --background-image: url('.//bg1.jpeg');
+  --text-shadow: 0 0 6px rgb(255,255,255)
+}
+
+

@@ -1,13 +1,19 @@
 {
-  "name": "vite-vue3-starter",
+  "name": "liku_blog",
   "version": "0.0.1",
   "private": false,
-  "description": "A Vite2.x + Vue3 + TypeScript template starter",
+  "description": "liku blog front",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build-tsc": "vue-tsc --noEmit && vite build",
+    "build_dev": "vite build --mode=dev",
+    "build_prod": "vite build --mode=prod",
+    "build_test": "vite build --mode=test",
     "serve": "vite preview",
+    "serve_dev": "vite serve --mode=dev",
+    "serve_prod": "vite serve --mode=prod",
+    "serve_test": "vite serve --mode=test",
     "format": "prettier --write ./src",
     "lint": "eslint ./src --ext .vue,.js,.ts",
     "lint-fix": "eslint --fix ./src --ext .vue,.js,.ts",
@@ -16,20 +22,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/XPoet/vite-vue3-starter.git"
+    "url": "git+ssh://https://github.com/yaoliqu/liku_blog"
   },
-  "keywords": [
-    "Vite",
-    "Vue3",
-    "TypeScript",
-    "Starter"
-  ],
-  "author": "XPoet",
+  "keywords": [],
+  "author": "liku",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/XPoet/vite-vue3-starter/issues"
+    "url": "https://github.com/yaoliqu/liku_blog/issues"
   },
-  "homepage": "https://github.com/XPoet/vite-vue3-starter#readme",
+  "homepage": "https://github.com/yaoliqu/liku_blog#readme",
   "lint-staged": {
     "*.{vue,js,ts}": "eslint --fix"
   },
@@ -42,14 +43,18 @@
     "@ant-design/icons-vue": "^6.0.1",
     "ant-design-vue": "^2.2.8",
     "axios": "^0.21.1",
+    "css-vars-ponyfill": "^2.4.7",
+    "moment": "^2.29.1",
+    "mutationobserver-shim": "^0.3.7",
+    "pinia": "^2.0.11",
     "vue": "^3.2.6",
-    "vue-router": "^4.0.11",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@types/jest": "^26.0.22",
+    "@types/node": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "@vitejs/plugin-vue": "^1.6.0",

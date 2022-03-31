@@ -1,6 +1,8 @@
 <template>
   <div class="Content-box">
-    <div class="content-center">1111</div>
+    <div class="content-center">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
