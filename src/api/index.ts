@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance } from 'axios'
 import { message } from 'ant-design-vue'
 import { showMessage } from './status' // 引入状态码文件
+import { IAxiosResponse } from '@/common/types/index'
 
 const axios: AxiosInstance = Axios.create({
   timeout: 20000 // 请求超时 20s
@@ -28,8 +29,7 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   (response) => {
-    // console.log(response)
-    return response
+    return response.data
   },
   (error) => {
     if (error.response && error.response.data) {
@@ -44,7 +44,6 @@ axios.interceptors.response.use(
       console.error(`${error}`)
       // ElMessage.error(`${error}`)
     }
-
     message.warning('网络连接异常,请稍后再试!')
     return Promise.reject(error)
   }
@@ -53,7 +52,7 @@ axios.interceptors.response.use(
 // 封装 GET POST 请求并导出
 export function request(url = '', params = {}, type = 'GET') {
   // 设置 url params type 的默认值
-  return new Promise((resolve, reject) => {
+  return new Promise<IAxiosResponse>((resolve, reject) => {
     let promise: any
     if (type.toUpperCase() === 'GET') {
       promise = axios({

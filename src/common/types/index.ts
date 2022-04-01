@@ -27,3 +27,9 @@ export interface personInfoType {
   qq: string
   wechat: string
 }
+
+export interface IAxiosResponse {
+  data: any
+  msg?: string
+  code?: number
+}

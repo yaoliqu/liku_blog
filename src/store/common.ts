@@ -5,14 +5,14 @@ export const usecommonState = defineStore({
   id: 'commonState', // id必填，且需要唯一
   state: () => {
     return {
-      jinrishiju: 'id必填，且需要唯一,id必填，且需要唯一',
+      jinrishiju: '',
       navShow: true,
       homeArticesList: [],
       themeStatus: false
     }
   },
   actions: {
-    getPoem(text: string) {
+    setPoem(text: string) {
       this.jinrishiju = text || '获取失败'
     },
     setNavShow(status: boolean) {

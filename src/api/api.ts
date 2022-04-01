@@ -35,9 +35,9 @@ export class landRelevant {
   }
 }
 
-export class Test {
-  static async test(params: any) {
+export class getGobalStatus {
+  static async getDesc(params: any) {
     // 接口三
-    return request('/api/abc', params, 'get')
+    return request('/front/describeList/getOne', params, 'get')
   }
 }
