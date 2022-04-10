@@ -12,13 +12,16 @@
       <img :src="avatarUrl" alt="avatar" class="nav-mobile-avatar" />
     </div>
     <!-- 这里是bottom -->
-    <!-- <div class="nav-nobile-bottom">飞鸟小站</div> -->
+    <div class="nav-nobile-bottom">liku的秘密基地</div>
     <div
       v-for="(item, index) in mobileNavArr"
       :key="index"
       :class="
-        pathname === item.to ? 'nav-mobile-item nav-mobile-active' : 'nav-mobile-item'
+        router.currentRoute.value.path === item.to
+          ? 'nav-mobile-item nav-mobile-active'
+          : 'nav-mobile-item'
       "
+      @click="goDetail(item.to)"
     >
       {{ item.name }}
     </div>
@@ -56,14 +59,17 @@ export default defineComponent({
     const changeTheme = (e: boolean) => {
       store.setThemeStatus(e)
     }
-    const pathname = router.currentRoute.value.path
+    const goDetail = (path: string) => {
+      router.push(path)
+    }
     return {
       avatarUrl,
       mobileNavArr,
-      pathname,
       setdrawerShow,
       ...toRefs(reactiveData),
-      changeTheme
+      changeTheme,
+      goDetail,
+      router
     }
   }
 })
@@ -87,9 +93,9 @@ export default defineComponent({
   display: none;
   position: fixed;
   height: 100%;
-  width: 100px;
+  width: 128px;
   top: 0;
-  right: -100px;
+  right: -128px;
   z-index: 999;
   box-shadow: none;
   transition: all 0.3s;

@@ -12,23 +12,9 @@
             @update:checked="checked = $event"
             @change="changeTheme(checked)"
           />
-          <!-- <a-switch v-model:checked="checked"   @change="changeTheme(checked)" /> -->
         </a>
         <span>明亮</span>
       </div>
-      <!-- 下拉tabs -->
-      <!-- <div class="nav-btn common-hover articles-btn">
-        <div class="articels-second">
-          <div v-for="item in articleNavList" :key="item.id">
-            <router-link
-              :to="item.to"
-              class="articels-second-item theme-color common-hover"
-              >{{ item.name }}</router-link
-            >
-          </div>
-        </div>
-        文章
-      </div>-->
       <div v-for="item in navArr" :key="item.id">
         <router-link
           :to="item.to"
@@ -46,7 +32,7 @@
 import { defineComponent, reactive, computed, toRefs } from 'vue'
 import { HomeOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
-import { articleNavList, navArr } from '@/utils/constant'
+import { navArr } from '@/utils/constant'
 import { usecommonState } from '@/store/common'
 
 export default defineComponent({
@@ -69,7 +55,6 @@ export default defineComponent({
     }
     return {
       ...toRefs(reactiveData),
-      articleNavList,
       navArr,
       router,
       changeTheme

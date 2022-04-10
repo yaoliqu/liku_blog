@@ -34,6 +34,9 @@ export const showMessage = (status: number | string): string => {
     case 505:
       message = 'HTTP版本不受支持(505)'
       break
+    case 10001:
+      message = '获取失败'
+      break
     default:
       message = `连接出错(${status})!`
   }

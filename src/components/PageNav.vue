@@ -1,16 +1,35 @@
 <template>
   <div class="PageNav-box animated bounceInLeft">
     <a-pagination
-      :current="1"
-      :total="100"
-      :defaultPageSize="1"
+      :hideOnSinglePage="true"
+      :current="props.pageNum"
+      :total="props.total"
+      :pageSize="props.pageSize"
       :showSizeChanger="false"
       :showTitle="false"
+      @change="pageChange"
     />
   </div>
 </template>
 
-<script></script>
+<script lang="ts" setup>
+import { withDefaults, defineProps, defineEmits } from 'vue'
+
+interface IProps {
+  pageSize: number
+  pageNum: number
+  total: number
+}
+const props = withDefaults(defineProps<IProps>(), {
+  pageSize: 0,
+  pageNum: 0,
+  total: 0
+})
+const emits = defineEmits(['pageChange'])
+const pageChange = (current: number, pageSize: number) => {
+  emits('pageChange', current, pageSize)
+}
+</script>
 
 <style>
 .PageNav-box {

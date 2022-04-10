@@ -1,15 +1,18 @@
 <template>
   <div class="animated bounceInRight">
     <div class="aside-card TagCard-box theme-color">
-      <span class="theTag common-hover"> {item.tag} </span>
+      <span class="theTag common-hover" v-for="item in tagsList" :key="item.id">
+        {{ item.tag }}
+      </span>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { usecommonState } from '@/store/index'
 
-export default defineComponent({})
+const tagsList: any = computed(() => usecommonState().tagsList)
 </script>
 
 <style>

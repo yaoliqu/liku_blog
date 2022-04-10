@@ -13,13 +13,12 @@ export interface articleNavIfc {
 export interface articleListIFC {
   classes: string
   content: string
-  date: number
-  tags: string[]
+  date: string
+  tags: any
   title: string
-  titleEng: string
   url: string
-  _id: string
-  _openid: string
+  id: string
+  isshow?: number
 }
 
 export interface personInfoType {
@@ -30,6 +29,6 @@ export interface personInfoType {
 
 export interface IAxiosResponse {
   data: any
-  msg?: string
-  code?: number
+  msg?: any
+  code?: any
 }

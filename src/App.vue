@@ -1,22 +1,11 @@
 <template>
-  <Main v-if="done" />
-  <Loading v-else />
+  <router-view />
 </template>
-
 <script lang="ts" setup>
-import { ref } from 'vue'
-import Main from '@/components/Blog/index.vue'
-import Loading from '@/components/Loading/index.vue'
-import { getGobalStatus } from './api/api'
-import { usecommonState } from '@/store/common'
+import { usecommonState } from '@/store/index'
+import setTheme from '@/utils/themeUtil'
 
-const commonState = usecommonState()
-
-// 获取描述
-getGobalStatus.getDesc({}).then((res) => {
-  commonState.setPoem(res.data)
-})
-const done = ref(true)
+setTheme(usecommonState().themeStatus)
 </script>
 <style lang="stylus">
 #app {

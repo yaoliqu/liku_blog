@@ -1,7 +1,11 @@
 <template>
-  <div class="Blog-box">
+  <div class="Content-box">
     <Nav />
-    <Content />
+    <div class="content-center">
+      <div class="Blog-box">
+        <router-view />
+      </div>
+    </div>
     <Footer />
     <a-back-top :duration="700" :visibilityHeight="300" class="BackTop" @click="goBack">
       <div class="back-top-btn theme-color common-hover">
@@ -19,10 +23,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { VerticalAlignTopOutlined, MenuOutlined } from '@ant-design/icons-vue'
-import Nav from './Nav/index.vue'
-import Content from './Content/index.vue'
-import Footer from './Footer/index.vue'
-import NavMobile from './NavMobile/index.vue'
+import Nav from './components/Nav.vue'
+import Footer from './components/footer.vue'
+import NavMobile from './components/NavMobile.vue'
 import { usecommonState } from '@/store/common'
 
 const userStore = usecommonState()
@@ -36,16 +39,38 @@ const setdrawerShow = (status: boolean) => {
 </script>
 
 <style scoped>
-.Blog-box {
+.Content-box {
   /* min-height: calc(100vh - 60px - 120px); */
   min-height: calc(100vh - 120px);
-  position: relative;
-  font-family: 'yu100';
+  margin-bottom: 40px;
   background-position: center 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-image: var(--background-image);
+}
+
+.content-center {
+  /* min-height: calc(100vh - 60px - 120px); */
+  min-height: calc(100vh - 120px);
+  /* width: 1300px; */
+  width: 1200px;
+  margin: auto;
+}
+
+@media all and (max-width: 1240px) {
+  .content-center {
+    width: 100%;
+    /* padding: 0 10px; */
+  }
+}
+
+.Blog-box {
+  /* min-height: calc(100vh - 60px - 120px); */
+  min-height: calc(100vh - 120px);
+  position: relative;
+  font-family: 'yu100';
+  padding: 10px;
 }
 
 .back-top-btn {

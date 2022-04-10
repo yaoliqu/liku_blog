@@ -11,6 +11,9 @@
       <span class="site-frame theme-color common-hover"> typescript </span>
       <span class="site-frame theme-color common-hover"> vite </span>
       <span class="site-frame theme-color common-hover"> pinia </span>
+      <span class="site-frame theme-color common-hover"> antd </span>
+      <span class="site-frame theme-color common-hover"> egg </span>
+      <span class="site-frame theme-color common-hover"> mysql </span>
     </span>
   </footer>
 </template>
@@ -51,6 +54,21 @@ footer {
 @media all and (max-width: 1240px) {
   footer {
     font-size: 14px;
+  }
+}
+@media screen and (max-width: 1240px) {
+  footer {
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--theme-color-font);
+    font-size: 14px;
+  }
+  .site-frame {
+    display: none;
   }
 }
 </style>

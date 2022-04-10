@@ -1,11 +1,16 @@
 <template>
   <div class="animated bounceInRight">
     <div class="aside-card MyNotice-box theme-color">
-      <div class="notice">{notice}</div>
+      <div class="notice">{{ saySay }}</div>
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { usecommonState } from '@/store/index'
 
+const saySay = computed(() => usecommonState().saySay)
+</script>
 <style>
 .MyNotice-box {
   padding: 20px;

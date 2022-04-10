@@ -1,8 +1,8 @@
 <template>
-  <div class="animated bounceInLeft" v-for="item in articlesList" :key="item._id">
-    <div class="article-item theme-color">
+  <div class="animated bounceInLeft" v-for="item in articlesList" :key="item.id">
+    <div class="article-item theme-color" @click="showOneArticle(item)">
       <h1 class="article-item-title">{{ item.title }}</h1>
-      <p class="article-item-abstract">{{ item.content }}</p>
+      <div class="article-item-abstract">{{ item.content }}</div>
       <div class="article-item-info">
         <span class="article-item-date theme-color-1 common-hover">
           {{ item.date }}
@@ -19,19 +19,66 @@
       </div>
     </div>
   </div>
+  <checkModal :visibles="visible" @visibleChange="visibleChange" @handleOk="handleOk" />
 </template>
 
 <script lang="ts" setup>
 import moment from 'moment'
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { message } from 'ant-design-vue'
+import Md5 from 'js-md5'
 import { articleListIFC } from '@/common/types'
-import { articles } from '@/mook/data'
+import { noNetWorkArtiicle } from '@/utils/constant'
+import { useArticleState } from '@/store/index'
+import checkModal from '@/components/checkModal.vue'
+import { getArticleList } from '@/api/api'
 
-const { list } = articles
-const articlesList: articleListIFC[] = list.map((i: articleListIFC) => ({
-  ...i,
-  content: i.content.replace(/<a(.*?)>(.*?)<\/a>/g, '$2').replace(/[# |**|`|>]/g, ''),
-  date: moment(i.date).format('YYYY-MM-DD')
-}))
+const salt = 'liku'
+const router = useRouter()
+const ArticleState = useArticleState()
+const articlesList = computed(() =>
+  ArticleState.list.length
+    ? ArticleState.list.map((i: articleListIFC) => ({
+        ...i,
+        content: i.content
+          .replace(/<a(.*?)>(.*?)<\/a>/g, '$2')
+          .replace(/[# |**|`|>]/g, '')
+          .replace(/\\n/gm, ' '),
+        date: moment(parseInt(i.date, 10)).format('YYYY-MM-DD'),
+        tags: i.tags.split(',')
+      }))
+    : noNetWorkArtiicle
+)
+const visible = ref<boolean>(false)
+const articleId = ref<string>('')
+const showOneArticle = (item: articleListIFC) => {
+  if (item.isshow === 0) {
+    visible.value = true
+    articleId.value = item.id
+  } else {
+    router.push({ name: 'post', query: { id: item.id } })
+  }
+}
+const visibleChange = (e: boolean) => {
+  visible.value = e
+}
+const handleOk = (e: string) => {
+  getArticleList
+    .checkPwd({
+      id: articleId.value,
+      pwd: Md5(e + salt)
+    })
+    .then((res) => {
+      if (res.code === 200) {
+        sessionStorage.setItem('pwd', Md5(e + salt))
+        router.push({ name: 'post', query: { id: articleId.value } })
+        visible.value = false
+      } else {
+        message.error(res.msg)
+      }
+    })
+}
 </script>
 
 <style scoped>

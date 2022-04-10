@@ -3,20 +3,27 @@
     <div class="aside-card BlogData-box theme-color">
       <div class="blogData common-hover">
         <div class="type-name">文章</div>
-        <div class="type-num theme-color-font">{articleNum}</div>
+        <div class="type-num theme-color-font">{{ artCount }}</div>
       </div>
       <div class="blogData common-hover">
         <div class="type-name">分类</div>
-        <div class="type-num theme-color-font">{classNum}</div>
+        <div class="type-num theme-color-font">{{ classCount }}</div>
       </div>
       <div class="blogData common-hover">
         <div class="type-name">标签</div>
-        <div class="type-num theme-color-font">{tagNum}</div>
+        <div class="type-num theme-color-font">{{ tagsCount }}</div>
       </div>
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import { computed } from 'vue'
+import { usecommonState } from '@/store/index'
 
+const artCount = computed(() => usecommonState().artCount)
+const tagsCount = computed(() => usecommonState().tagsCount)
+const classCount = computed(() => usecommonState().classCount)
+</script>
 <style>
 .BlogData-box {
   height: 80px;
