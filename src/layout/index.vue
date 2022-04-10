@@ -62,6 +62,7 @@ const setdrawerShow = (status: boolean) => {
   .content-center {
     width: 100%;
     /* padding: 0 10px; */
+    min-height: 95vh;
   }
 }
 

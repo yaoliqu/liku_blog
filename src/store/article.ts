@@ -7,7 +7,10 @@ export const useArticleState = defineStore({
       list: [],
       total: 0,
       pageSize: 10,
-      pageNum: 1
+      pageNum: 1,
+      total_search: 0,
+      pageSize_search: 10,
+      pageNum_search: 1
     }
   },
   actions: {
@@ -20,6 +23,15 @@ export const useArticleState = defineStore({
     setPage(pageNum: number, pageSize: number) {
       this.pageNum = pageNum
       this.pageSize = pageSize
+    },
+    setArticleList_search(res: any) {
+      this.total_search = res.total
+      this.pageNum_search = res.pageNum
+      this.pageSize_search = res.pageSize
+    },
+    setPage_search(pageNum: number, pageSize: number) {
+      this.pageNum_search = pageNum
+      this.pageSize_search = pageSize
     }
   }
 })
