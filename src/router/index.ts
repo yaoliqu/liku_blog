@@ -21,9 +21,29 @@ const routes = [
         component: () => import('../views/article/index.vue')
       },
       {
+        path: '/classes',
+        name: 'classes',
+        component: () => import('../views/classes/index.vue')
+      },
+      {
+        path: '/tags',
+        name: 'tags',
+        component: () => import('../views/tags/index.vue')
+      },
+      {
         path: '/post',
         name: 'post',
         component: () => import('../views/post/index.vue')
+      },
+      {
+        path: '/classtagList',
+        name: 'classtagList',
+        component: () => import('../views/classtagList/index.vue')
+      },
+      {
+        path: '/say',
+        name: 'say',
+        component: () => import('../views/say/index.vue')
       }
     ]
   }

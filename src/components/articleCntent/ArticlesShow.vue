@@ -80,7 +80,7 @@ const handleOk = (e: string) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(148, 148, 148);
+  color: var(--theme-color-font1);
 }
 
 .art-show-title {

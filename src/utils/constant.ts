@@ -11,7 +11,7 @@ export const navArr: articleNavIfc[] = [
   { id: 1, name: '文章', to: '/article' },
   { id: 2, name: '分类', to: '/classes' },
   { id: 3, name: '标签', to: '/tags' },
-  { id: 4, name: '图库', to: '/gallery' },
+  // { id: 4, name: '图库', to: '/gallery' },
   { id: 5, name: '说说', to: '/say' },
   { id: 6, name: '关于', to: '/about' }
   // { id: 2, name: '留言', to: '/msg' },
@@ -24,7 +24,7 @@ export const mobileNavArr: articleNavIfc[] = [
   { id: 1, name: '文章', to: '/article' },
   { id: 2, name: '分类', to: '/classes' },
   { id: 3, name: '标签', to: '/tags' },
-  { id: 4, name: '图库', to: '/gallery' },
+  // { id: 4, name: '图库', to: '/gallery' },
   { id: 5, name: '说说', to: '/say' },
   { id: 6, name: '关于', to: '/about' }
   // { id: 6, name: '留言', to: '/msg' },
