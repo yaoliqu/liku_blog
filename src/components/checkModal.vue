@@ -1,4 +1,3 @@
-TS
 <template>
   <div>
     <a-modal
@@ -59,7 +58,7 @@ const handleOk = () => {
 }
 </script>
 
-<style>
+<style lang="less">
 .ant-modal-content {
   border-radius: 30px !important;
 }

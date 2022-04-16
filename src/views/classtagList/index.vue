@@ -1,49 +1,131 @@
 <template>
-  <PageTitle title="{myClass}" />
+  <PageTitle :title="title" />
   <div class="standard-page-box theme-color animated bounceInLeft">
-    <!-- <div class="art-show-none">暂时没有相应分类...</div> -->
-
-    <div class="animated bounceInUp" key="{item._id}">
-      <div class="art-show-item theme-color-1">
-        <!-- onClick={() => turnToArticle(item.titleEng)} -->
-        <div class="art-show-title">{item.title}</div>
-        <span class="art-show-date common-hover"> 2020-10-10 </span>
+    <template v-if="list.length">
+      <div class="animated bounceInUp" :key="item.id" v-for="item in list">
+        <div class="art-show-item theme-color-1" @click="showOneArticle(item)">
+          <div class="art-show-title">{{ item.title }}</div>
+          <span class="art-show-date common-hover">
+            {{ moment(parseInt(item.date, 10)).format('YYYY-MM-DD HH:mm:ss') }}
+          </span>
+        </div>
       </div>
-    </div>
-    <PageNav
-      :pageSize="pageSize"
-      :pageNum="pageNum"
-      :total="total"
-      @pageChange="pageChange"
-    />
+      <PageNav
+        :pageSize="pageSize"
+        :pageNum="pageNum"
+        :total="total"
+        @pageChange="pageChange"
+      />
+    </template>
+    <div class="art-show-none" v-else>暂时没有相应分类...</div>
   </div>
+  <checkModal :visibles="visible" @visibleChange="visibleChange" @handleOk="handleOk" />
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import moment from 'moment'
+import { useRouter } from 'vue-router'
+import { message } from 'ant-design-vue'
+import Md5 from 'js-md5'
 import PageTitle from '@/components/PageTitle.vue'
 import PageNav from '@/components/PageNav.vue'
 import { useArticleState } from '@/store/index'
 import { getArticleList } from '@/api/api'
+import checkModal from '@/components/checkModal.vue'
 
+const salt = 'liku'
+const title: any = ref('')
+const router = useRouter()
+const list: any = ref([])
 const ArticleState = useArticleState()
-const pageSize = computed(() => ArticleState.pageSize)
-const pageNum = computed(() => ArticleState.pageNum)
-const total = computed(() => ArticleState.total)
-const getArticle = () => {
-  // 获取文章列表
+const pageSize = computed(() =>
+  router.currentRoute.value.query.type === 'classes'
+    ? ArticleState.pageSize_classes
+    : ArticleState.pageSize_tags
+)
+const pageNum = computed(() =>
+  router.currentRoute.value.query.type === 'classes'
+    ? ArticleState.pageNum_classes
+    : ArticleState.pageNum_tags
+)
+const total = computed(() =>
+  router.currentRoute.value.query.type === 'classes'
+    ? ArticleState.total_classes
+    : ArticleState.total_tags
+)
+
+const getClassArticle = () => {
+  // 获取class文章列表
   getArticleList
-    .getList({
-      pageSize: ArticleState.pageSize,
-      pageNum: ArticleState.pageNum
+    .getClassListDetail({
+      pageSize: ArticleState.pageSize_classes,
+      pageNum: ArticleState.pageNum_classes,
+      classes: router.currentRoute.value.query.classes
     })
     .then((res) => {
-      ArticleState.setArticleList(res.data)
+      if (res) {
+        ArticleState.setArticleList_classes(res.data)
+        list.value = res.data.list
+      }
+    })
+}
+const getTagsArticle = () => {
+  // 获取tags文章列表
+  getArticleList
+    .getClassList({
+      pageSize: ArticleState.pageSize_classes,
+      pageNum: ArticleState.pageNum_classes
+    })
+    .then((res) => {
+      ArticleState.setArticleList_tags(res.data)
     })
 }
 const pageChange = async (current: number, pagesize: number) => {
-  await ArticleState.setPage(current, pagesize)
-  await getArticle()
+  if (router.currentRoute.value.query.type === 'classes') {
+    await ArticleState.setPage_classes(current, pagesize)
+    await getClassArticle()
+  } else {
+    await ArticleState.setPage_tags(current, pagesize)
+    await getTagsArticle()
+  }
+}
+
+if (router.currentRoute.value.query.type === 'classes') {
+  title.value = router.currentRoute.value.query.classes
+  getClassArticle()
+} else {
+  title.value = router.currentRoute.value.query.tags
+  getTagsArticle()
+}
+const visible = ref<boolean>(false)
+const articleId = ref<string>('')
+const showOneArticle = (item) => {
+  if (item.isshow === 0) {
+    visible.value = true
+    articleId.value = item.id
+  } else {
+    router.push({ name: 'post', query: { id: item.id } })
+  }
+}
+const visibleChange = (e: boolean) => {
+  visible.value = e
+}
+const handleOk = (e: string) => {
+  getArticleList
+    .checkPwd({
+      id: articleId.value,
+      pwd: Md5(e + salt)
+    })
+    .then((res) => {
+      if (res.code === 200) {
+        sessionStorage.setItem('pwd', Md5(e + salt))
+        router.push({ name: 'post', query: { id: articleId.value } })
+        visible.value = false
+      } else {
+        message.error(res.msg)
+      }
+    })
 }
 </script>
 <style scoped>

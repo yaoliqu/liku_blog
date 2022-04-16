@@ -29,6 +29,26 @@ export class getArticleList {
     // 私密文章验证
     return request(`${urlPrefix}/articleList/checkPwd`, params, 'post')
   }
+
+  static async getAbout(params: any) {
+    // 关于
+    return request(`${urlPrefix}/articleList/about`, params, 'get')
+  }
+
+  static async getSay(params: any) {
+    // 关于
+    return request(`${urlPrefix}/articleList/say`, params, 'get')
+  }
+
+  static async getClassList(params: any) {
+    // 获取分类列表
+    return request(`${urlPrefix}/articleList/classList`, params, 'get')
+  }
+
+  static async getClassListDetail(params: any) {
+    // 获取分类列表详情
+    return request(`${urlPrefix}/articleList/classListDetail`, params, 'get')
+  }
 }
 
 // export class UserService {

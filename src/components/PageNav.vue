@@ -25,6 +25,7 @@ const props = withDefaults(defineProps<IProps>(), {
   pageNum: 0,
   total: 0
 })
+
 const emits = defineEmits(['pageChange'])
 const pageChange = (current: number, pageSize: number) => {
   emits('pageChange', current, pageSize)

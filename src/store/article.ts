@@ -10,7 +10,13 @@ export const useArticleState = defineStore({
       pageNum: 1,
       total_search: 0,
       pageSize_search: 10,
-      pageNum_search: 1
+      pageNum_search: 1,
+      total_classes: 0,
+      pageSize_classes: 10,
+      pageNum_classes: 1,
+      total_tags: 0,
+      pageSize_tags: 10,
+      pageNum_tags: 1
     }
   },
   actions: {
@@ -32,6 +38,24 @@ export const useArticleState = defineStore({
     setPage_search(pageNum: number, pageSize: number) {
       this.pageNum_search = pageNum
       this.pageSize_search = pageSize
+    },
+    setArticleList_classes(res: any) {
+      this.total_classes = res.total
+      this.pageSize_classes = res.pageSize
+      this.pageNum_classes = res.pageNum
+    },
+    setPage_classes(pageNum: number, pageSize: number) {
+      this.pageNum_classes = pageNum
+      this.pageSize_classes = pageSize
+    },
+    setArticleList_tags(res: any) {
+      this.total_tags = res.total
+      this.pageSize_tags = res.pageSize
+      this.pageNum_tags = res.pageNum
+    },
+    setPage_tags(pageNum: number, pageSize: number) {
+      this.pageNum_tags = pageNum
+      this.pageSize_tags = pageSize
     }
   }
 })

@@ -1,17 +1,16 @@
 <template>
   <PageTitle title="自言自语" />
   <div class="standard-page-box theme-color">
-    <div class="say-item" key="{item._id}">
+    <div class="say-item" :key="item.id" v-for="item in sayList">
       <div class="say-avatar-box animated bounceInLeft">
         <img :src="avatarUrl" alt="avatar" class="say-avatar" />
       </div>
-
       <div class="say-content-box">
         <div class="animated bounceInRight">
           <div class="say-content theme-color-1">
-            {item.content}
+            {{ item.content }}
             <span class="say-content-date theme-color-2 common-hover">
-              {moment(item.date).format('YYYY-MM-DD HH:mm:ss')}
+              {{ moment(parseInt(item.date, 10)).format('YYYY-MM-DD HH:mm:ss') }}
             </span>
           </div>
         </div>
@@ -20,8 +19,18 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { ref } from 'vue'
+import moment from 'moment'
 import PageTitle from '@/components/PageTitle.vue'
+import { getArticleList } from '@/api/api'
 import { avatarUrl } from '@/utils/constant'
+
+const sayList: any = ref([])
+getArticleList.getSay({}).then((res) => {
+  if (res) {
+    sayList.value = res.data
+  }
+})
 </script>
 <style scoped>
 .standard-page-box {

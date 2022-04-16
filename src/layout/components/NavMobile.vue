@@ -29,8 +29,8 @@
       <a-switch
         :checked="checked"
         @update:checked="checked = $event"
-        checked-children="开"
-        un-checked-children="关"
+        checked-children="暗"
+        un-checked-children="亮"
         @change="changeTheme(checked)"
       />
     </a>

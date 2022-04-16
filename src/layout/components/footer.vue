@@ -3,7 +3,7 @@
     <span style="color: #fff"> liku的秘密基地 </span>
     <span>
       <a href="https://lzxjack.top/" target="_blank" rel="noreferrer" class="icp">
-        参考自: 飞鸟小站
+        ui交互参考自: 飞鸟小站
       </a>
     </span>
     <span>
