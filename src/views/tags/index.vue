@@ -1,25 +1,40 @@
 <template>
   <PageTitle title="标签" />
   <div class="standard-page-box theme-color tags-box animated bounceInLeft">
-    <!-- {tags.map(item => (
-                    <span
-                        class="theTag tags-item common-hover"
-                        key={item._id}
-                    >
-                        onClick={() => toSomeArts(item.tag)}
+    <template v-if="tagsList.length">
+      <span
+        @click="toSomeArts(item)"
+        class="theTag tags-item common-hover"
+        :key="item.id"
+        v-for="item in tagsList"
+        >{{ item.tag }}
+      </span>
+    </template>
 
-                        {item.tag}
-                    </span>
-                ))} -->
-    <span class="theTag tags-item common-hover" key="{item._id}">aaaa </span>
-    <span class="theTag tags-item common-hover" key="{item._id}">aaaa </span>
-    <span class="theTag tags-item common-hover" key="{item._id}">aaaa </span>
-    <!-- <div class="art-show-none">暂时没有相应标签..</div> -->
+    <div class="art-show-none" v-else>暂时没有相应标签..</div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import PageTitle from '@/components/PageTitle.vue'
+import { getArticleList } from '@/api/api'
+
+const tagsList: any = ref([])
+// 获取分类列表
+getArticleList.getTagsList({}).then((res) => {
+  if (res) {
+    tagsList.value = res.data
+  }
+})
+const router = useRouter()
+const toSomeArts = (item: any) => {
+  router.push({
+    name: 'classtagList',
+    query: { tags: item.tag, id: item.id, type: 'tags' }
+  })
+}
 </script>
 
 <style scoped>

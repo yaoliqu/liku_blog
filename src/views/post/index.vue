@@ -16,7 +16,7 @@
 
     <div class="standard-page-box theme-color">
       <ArticleContent :content="contentData?.content" />
-      <ArticleTags :tags="contentData?.tags" />
+      <ArticleTags :tags="contentData?.tagslists" />
       <div class="Divider"></div>
       <div class="updateTime" v-if="contentData?.updateTime">
         更新于 {{ contentData?.updateTime }}

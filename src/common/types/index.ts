@@ -14,7 +14,7 @@ export interface articleListIFC {
   classes: string
   content: string
   date: string
-  tags: any
+  tagslists: any
   title: string
   url: string
   id: string

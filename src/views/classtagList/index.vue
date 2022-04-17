@@ -17,7 +17,11 @@
         @pageChange="pageChange"
       />
     </template>
-    <div class="art-show-none" v-else>暂时没有相应分类...</div>
+    <div class="art-show-none" v-else>
+      暂时没有相应{{
+        router.currentRoute.value.query.type === 'classes' ? '分类' : '标签'
+      }}...
+    </div>
   </div>
   <checkModal :visibles="visible" @visibleChange="visibleChange" @handleOk="handleOk" />
 </template>
@@ -73,12 +77,14 @@ const getClassArticle = () => {
 const getTagsArticle = () => {
   // 获取tags文章列表
   getArticleList
-    .getClassList({
-      pageSize: ArticleState.pageSize_classes,
-      pageNum: ArticleState.pageNum_classes
+    .getTagsListdetail({
+      pageSize: ArticleState.pageSize_tags,
+      pageNum: ArticleState.pageNum_tags,
+      tagId: router.currentRoute.value.query.id
     })
     .then((res) => {
       ArticleState.setArticleList_tags(res.data)
+      list.value = res.data.list
     })
 }
 const pageChange = async (current: number, pagesize: number) => {
@@ -100,7 +106,7 @@ if (router.currentRoute.value.query.type === 'classes') {
 }
 const visible = ref<boolean>(false)
 const articleId = ref<string>('')
-const showOneArticle = (item) => {
+const showOneArticle = (item: any) => {
   if (item.isshow === 0) {
     visible.value = true
     articleId.value = item.id

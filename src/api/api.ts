@@ -49,6 +49,16 @@ export class getArticleList {
     // 获取分类列表详情
     return request(`${urlPrefix}/articleList/classListDetail`, params, 'get')
   }
+
+  static async getTagsList(params: any) {
+    // 获取tag列表
+    return request(`${urlPrefix}/articleList/getTagsList`, params, 'get')
+  }
+
+  static async getTagsListdetail(params: any) {
+    // 获取tag列表详情
+    return request(`${urlPrefix}/articleList/getTagsListdetail`, params, 'get')
+  }
 }
 
 // export class UserService {

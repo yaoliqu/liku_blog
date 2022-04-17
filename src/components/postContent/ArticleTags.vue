@@ -3,27 +3,24 @@
     <span
       v-for="item in reactiveData"
       class="tag theme-color-1 common-hover"
-      :key="item"
+      :key="item.id"
     >
-      {{ item }}
+      {{ item.tag }}
     </span>
   </div>
 </template>
 <script lang="ts" setup>
-import { withDefaults, defineProps, watch, ref } from 'vue'
+import { defineProps, watch, ref } from 'vue'
 
-interface IProps {
-  tags: string
-}
-const props = withDefaults(defineProps<IProps>(), {
-  tags: ''
+const props = defineProps({
+  tags: []
 })
 const reactiveData: any = ref([])
 
 watch(
   () => props.tags,
   (val) => {
-    reactiveData.value = val.split(',') || []
+    reactiveData.value = val || []
   }
 )
 </script>

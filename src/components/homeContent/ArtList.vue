@@ -10,10 +10,10 @@
         <div class="article-item-tags">
           <span
             class="article-item-tag theme-color-1 common-hover"
-            v-for="tag in item.tags"
-            :key="tag"
+            v-for="tag in item.tagslists"
+            :key="tag.id"
           >
-            {{ tag }}
+            {{ tag.tag }}
           </span>
         </div>
       </div>
@@ -45,8 +45,7 @@ const articlesList = computed(() =>
           .replace(/<a(.*?)>(.*?)<\/a>/g, '$2')
           .replace(/[# |**|`|>]/g, '')
           .replace(/\\n/gm, ' '),
-        date: moment(parseInt(i.date, 10)).format('YYYY-MM-DD'),
-        tags: i.tags.split(',')
+        date: moment(parseInt(i.date, 10)).format('YYYY-MM-DD')
       }))
     : noNetWorkArtiicle
 )

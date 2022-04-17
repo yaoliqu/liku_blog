@@ -45,7 +45,7 @@ export const noNetWorkArtiicle = [
     classes: '网络挂了',
     content: `网络出现了点问题，请稍后重试。抱歉！！！`,
     date: moment().format('YYYY-MM-DD'),
-    tags: '崩溃了',
+    tagslists: [{ id: 1, tags: '崩溃了' }],
     title: '网络崩溃了~',
     id: 'bf4a0bf261d026b90202b1c831d8b4c9',
     url: ''
