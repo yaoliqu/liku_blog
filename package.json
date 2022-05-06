@@ -11,7 +11,7 @@
     "build_prod": "vite build --mode=prod",
     "build_test": "vite build --mode=test",
     "serve": "vite preview",
-    "serve_dev": "vite serve --mode=dev",
+    "serve_dev": "vite serve --mode=dev --host 0.0.0.0",
     "serve_prod": "vite serve --mode=prod",
     "serve_test": "vite serve --mode=test",
     "format": "prettier --write ./src",

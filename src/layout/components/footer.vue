@@ -14,6 +14,7 @@
       <span class="site-frame theme-color common-hover"> antd </span>
       <span class="site-frame theme-color common-hover"> egg </span>
       <span class="site-frame theme-color common-hover"> mysql </span>
+      <span class="site-frame theme-color common-hover"> Sequelize </span>
     </span>
   </footer>
 </template>
