@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, toRefs } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { HomeOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 import { navArr } from '@/utils/constant'
@@ -46,15 +46,15 @@ export default defineComponent({
     document.body.onmousewheel = () => {
       store.setNavShow((window as any).event.wheelDeltaY > 0)
     }
-    const reactiveData = reactive({
-      navShow: computed(() => store.navShow),
-      checked: computed(() => store.themeStatus)
-    })
+    const navShow = computed(() => store.navShow)
+    const checked = computed(() => store.themeStatus)
+
     const changeTheme = (e: boolean) => {
       store.setThemeStatus(e)
     }
     return {
-      ...toRefs(reactiveData),
+      navShow,
+      checked,
       navArr,
       router,
       changeTheme

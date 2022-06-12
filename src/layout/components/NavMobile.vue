@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { avatarUrl, mobileNavArr } from '@/utils/constant'
 import { usecommonState } from '@/store/common'
@@ -53,9 +53,7 @@ export default defineComponent({
     const setdrawerShow = () => {
       emit('setdrawerShow', false)
     }
-    const reactiveData = reactive({
-      checked: computed(() => store.themeStatus)
-    })
+    const checked = computed(() => store.themeStatus)
     const changeTheme = (e: boolean) => {
       store.setThemeStatus(e)
     }
@@ -66,7 +64,7 @@ export default defineComponent({
       avatarUrl,
       mobileNavArr,
       setdrawerShow,
-      ...toRefs(reactiveData),
+      checked,
       changeTheme,
       goDetail,
       router
